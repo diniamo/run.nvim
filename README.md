@@ -34,3 +34,10 @@ vim.keymap.set('n', "<leader>ro", function() runit.run(nil, true) end)
 -- Prompts for a command to run, without overriding
 vim.keymap.set('n', "<leader>rc", function() runit.run(vim.fn.input("Run command: "), false) end)
 ```
+
+## API
+
+The plugin exposes the following fields:
+- `setup()` - initialization
+- `run(command, override)` - main functionality, explained above
+- `cache` - this is simply a table mapping paths to commands. Note that setting a field in the table will overwrite it in the cache on the disk as well.

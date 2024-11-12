@@ -32,7 +32,7 @@ vim.keymap.set('n', "<leader>rn", runit.run)
 -- Prompts for a command, and overrides the cached one with it
 vim.keymap.set('n', "<leader>ro", function() runit.run(nil, true) end)
 -- Prompts for a command to run, without overriding
-vim.keymap.set('n', "<leader>rc", function() runit.run(vim.fn.input("Run command: "), false) end)
+vim.keymap.set('n', "<leader>rc", function() runit.run(nil, false) end)
 ```
 
 ## API

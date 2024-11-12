@@ -35,9 +35,9 @@ function M.run(command, override)
 end
 
 function M.setup()
-    M.cache = require("fast-runner.cache")
+    M.cache = require("runit.cache")
 
-    vim.api.nvim_create_user_command("Run", run_handler, {bang = true, nargs = "?"})
+    vim.api.nvim_create_user_command("Runit", run_handler, {bang = true, nargs = "?"})
 end
 
 return M

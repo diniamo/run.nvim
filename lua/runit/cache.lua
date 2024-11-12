@@ -3,7 +3,7 @@ local function load_json(path)
     return vim.json.decode(file:read("*all"))
 end
 
-local cache_path = vim.fs.joinpath(vim.fn.stdpath("data"), "fast-runner_cache.json")
+local cache_path = vim.fs.joinpath(vim.fn.stdpath("data"), "runit_cache.json")
 
 local ok, cache = pcall(load_json, cache_path)
 if not ok then

@@ -2,7 +2,7 @@
 
 A minimalistic code runner for fast iteration.
 
-Instead of configuring how to run projects per-language or per-project, run.nvim simply caches the last command you ran with it, and uses that until you override it.
+Instead of having to configure per-project or per-extension, run.nvim simply caches the last command you ran, and uses that until you override it.
 
 ## Setup
 

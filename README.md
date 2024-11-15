@@ -9,11 +9,14 @@ Instead of having to configure per-project or per-extension, run.nvim simply cac
 Install the plugin with your favorite plugin manager, and call the setup function with your configuration (the values below are the defaults):
 ```lua
 require("run").setup({
-    -- Disable `number` and `relativenumber`
+    -- Disable number and relativenumber.
     disable_number = true,
+    -- The percentage to darkness by, eg. 0.2 makes the terminal 20% darker,
+    -- whereas -0.2 makes it 20% lighter. Set to false to disable.
+    darken = 0.2,
     -- This is passed directly to `nvim_open_win` (see `:help nvim_open_win`),
     -- with the exception of row, column, width and height, which are used as
-    -- percentages if between 0 and 1. Eg. 0.25 takes the 25% of Neovim's
+    -- percentages if between 0 and 1. Eg. 0.25 takes up 25% of Neovim's.
     -- width/height.
     winopts = {
         split = "below",

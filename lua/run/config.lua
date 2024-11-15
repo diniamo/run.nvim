@@ -1,5 +1,6 @@
 local config = {
     disable_number = true,
+    darken = 0.2,
     winopts = {
         split = "below",
         height = 0.25
@@ -15,5 +16,5 @@ return setmetatable(proxy, {
     __index = function(_, k)
         return config[k]
     end,
-    __newindex = function() end
+    __newindex = nil
 })

@@ -1,5 +1,6 @@
 local M = {}
 
+local bit = require("bit")
 local config = require("run.config")
 
 local terminal = {}
@@ -7,6 +8,19 @@ local terminal = {}
 local function round(n)
     local f = math.floor(n)
     return (n - f) < 0.5 and f or math.ceil(n)
+end
+
+local function darken(color, amount)
+    local r = bit.band(bit.rshift(color, 16), 0xFF)
+    local g = bit.band(bit.rshift(color, 8), 0xFF)
+    local b = bit.band(color, 0xFF)
+
+    local multiplier = 1 - amount
+    r = round(r * multiplier)
+    g = round(g * multiplier)
+    b = round(b * multiplier)
+
+    return string.format("#%02x%02x%02x", r, g, b)
 end
 
 local function normalize(val, max)
@@ -65,6 +79,14 @@ local function prepare()
         if config.disable_number then
             wo.number = false
             wo.relativenumber = false
+        end
+
+        if config.darken then
+            local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+            normal.bg = darken(normal.bg, config.darken)
+            vim.api.nvim_set_hl(0, "RunNormal", normal)
+
+            wo.winhighlight = "Normal:RunNormal"
         end
     else
         vim.api.nvim_win_set_buf(terminal.window, terminal.buffer)

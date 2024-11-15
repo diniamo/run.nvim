@@ -2,7 +2,7 @@
 
 A minimalistic code runner for fast iteration.
 
-Instead of having to configure per-project or per-extension, run.nvim simply caches the last command you ran, and uses that until you override it.
+Instead of having to configure per-project or per-extension run commands, run.nvim simply caches the last command you ran in the project, and uses that until you override it.
 
 ## Setup / Configuration
 
@@ -36,7 +36,7 @@ The plugin consists of only one command called `Run` (and it's lua counterpart -
     - If an argument *was* passed, use that as the command, and override the cached one with it
     - If an argument was *not* passed, prompt for one, and override the cached command with it
 
-It's also recommended to add mappings:
+It's also recommended to create mappings:
 
 ```lua
 local run = require("run")

@@ -4,11 +4,22 @@ A minimalistic code runner for fast iteration.
 
 Instead of having to configure per-project or per-extension, run.nvim simply caches the last command you ran, and uses that until you override it.
 
-## Setup
+## Setup / Configuration
 
-Install the plugin with your favorite plugin manager, and call the setup function:
+Install the plugin with your favorite plugin manager, and call the setup function with your configuration (the values below are the defaults):
 ```lua
-require("run").setup()
+require("run").setup({
+    -- Disable `number` and `relativenumber`
+    disable_number = true,
+    -- This is passed directly to `nvim_open_win` (see `:help nvim_open_win`),
+    -- with the exception of row, column, width and height, which are used as
+    -- percentages if between 0 and 1. Eg. 0.25 takes the 25% of Neovim's
+    -- width/height.
+    winopts = {
+        split = "below",
+        height = 0.25
+    }
+})
 ```
 
 ## Usage
@@ -41,3 +52,4 @@ The plugin exposes the following fields:
 - `setup()` - initialization
 - `run(command, override)` - main functionality, explained above
 - `cache` - this is simply a table mapping paths to commands. Note that setting a field in the table will overwrite it in the cache on the disk as well.
+- `config` - the configuration table in use

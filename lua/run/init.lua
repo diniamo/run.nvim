@@ -1,5 +1,7 @@
 local M = {}
 
+local terminal = require("run.terminal")
+
 local function effective_cwd()
     local git = vim.fs.find(".git", {upward = true, type = "directory"})
     return git[1] or vim.uv.cwd()
@@ -31,10 +33,11 @@ function M.run(command, override)
     end
 
     print("Running `" .. command .. "`")
-    -- TODO: run comand
+    terminal.run_command(command, cwd)
 end
 
-function M.setup()
+function M.setup(config)
+    M.config = require("run.config")(config)
     M.cache = require("run.cache")
 
     vim.api.nvim_create_user_command("Run", run_handler, {bang = true, nargs = "?"})

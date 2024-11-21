@@ -1,4 +1,5 @@
 local config = {
+    notification_format = nil,
     disable_number = true,
     darken = 0.2,
     winopts = {

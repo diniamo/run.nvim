@@ -28,7 +28,9 @@ function M.run(command, override)
         end
     end
 
-    print("Running `" .. command .. "`")
+    if M.config.notification_format then
+        vim.notify(string.format(M.config.notification_format, command))
+    end
     terminal.run_command(command, cwd)
 end
 

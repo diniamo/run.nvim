@@ -17,13 +17,19 @@ function M.run(command, override)
     end
 
     local cwd = effective_cwd()
+    -- An empty string from input() means the user didn't enter anything OR cancelled the input,
+    -- so we just ignore it if that's the case.
     if override then
         command = command or prompt_command()
+        if command == "" then return end
+
         M.cache[cwd] = command
     else
         command = command or M.cache[cwd]
         if not command then
             command = prompt_command()
+            if command == "" then return end
+
             M.cache[cwd] = command
         end
     end

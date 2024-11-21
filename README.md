@@ -50,7 +50,10 @@ vim.keymap.set('n', "<leader>ri", run.run)
 -- Prompts for a command, and overrides the cached one with it
 vim.keymap.set('n', "<leader>ro", function() run.run(nil, true) end)
 -- Prompts for a command to run, without overriding
-vim.keymap.set('n', "<leader>rc", function() run.run(vim.fn.input("Run command: "), false) end)
+vim.keymap.set('n', "<leader>rc", function()
+    local input = vim.fn.input("Run command: ")
+    if input ~= "" then run.run(input, false) end
+end)
 ```
 
 ## API

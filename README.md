@@ -42,11 +42,11 @@ It's also recommended to create mappings:
 local run = require("run")
 
 -- Runs the cached command
-vim.keymap.set('n', "<leader>rn", run.run)
+vim.keymap.set('n', "<leader>ri", run.run)
 -- Prompts for a command, and overrides the cached one with it
 vim.keymap.set('n', "<leader>ro", function() run.run(nil, true) end)
 -- Prompts for a command to run, without overriding
-vim.keymap.set('n', "<leader>rc", function() run.run(nil, false) end)
+vim.keymap.set('n', "<leader>rc", function() run.run(vim.fn.input("Run command: "), false) end)
 ```
 
 ## API

@@ -1,4 +1,5 @@
 local config = {
+    autosave = false,
     notification_format = nil,
     disable_number = true,
     darken = 0.2,
@@ -14,8 +15,6 @@ return setmetatable(proxy, {
         config = vim.tbl_deep_extend("force", config, merge)
         return proxy
     end,
-    __index = function(_, k)
-        return config[k]
-    end,
+    __index = function(_, k) return config[k] end,
     __newindex = nil
 })

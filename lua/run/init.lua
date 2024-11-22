@@ -12,9 +12,7 @@ local function prompt_command()
 end
 
 function M.run(command, override)
-    if command == "" then
-        command = nil
-    end
+    if command == "" then command = nil end
 
     local cwd = effective_cwd()
     -- An empty string from input() means the user didn't enter anything OR cancelled the input,
@@ -34,9 +32,8 @@ function M.run(command, override)
         end
     end
 
-    if M.config.notification_format then
-        vim.notify(string.format(M.config.notification_format, command))
-    end
+    if M.config.autosave then vim.cmd("silent! write") end
+    if M.config.notification_format then vim.notify(string.format(M.config.notification_format, command)) end
     terminal.run_command(command, cwd)
 end
 

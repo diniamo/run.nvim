@@ -9,6 +9,8 @@ Instead of having to configure per-project or per-extension run commands, run.nv
 Install the plugin with your favorite plugin manager, and call the setup function with your configuration (the values below are the defaults):
 ```lua
 require("run").setup({
+    -- Automatically save the current buffer before running the command.
+    autosave = false,
     -- The format used for sending a notification before running a command,
     -- where %s represents the command (see lua's string.format). Set to nil
     -- to disable notifications. Eg. "$ %s"

@@ -38,7 +38,9 @@ function M.run(command, override)
 end
 
 function M.setup(config)
-    M.config = require("run.config")(config)
+    M.config = require("run.config")
+    if config then M.config(config) end
+
     M.cache = require("run.cache")
 
     vim.api.nvim_create_user_command("Run", function(cmd) M.run(cmd.args, cmd.bang) end, { bang = true, nargs = "?" })

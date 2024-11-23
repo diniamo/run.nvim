@@ -11,7 +11,7 @@ local config = {
 
 local proxy = {}
 return setmetatable(proxy, {
-    __call = function(merge)
+    __call = function(_, merge)
         config = vim.tbl_deep_extend("force", config, merge)
         return proxy
     end,

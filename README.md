@@ -17,8 +17,8 @@ require("run").setup({
     notification_format = nil,
     -- Disable number and relativenumber.
     disable_number = true,
-    -- The percentage to darkness by, eg. 0.2 makes the terminal 20% darker,
-    -- whereas -0.2 makes it 20% lighter. Set to false to disable.
+    -- The percentage to darken the window by, eg. 0.2 makes the terminal 20%
+    -- darker, whereas -0.2 makes it 20% lighter. Set to false to disable.
     darken = 0.2,
     -- This is passed directly to `nvim_open_win` (see `:help nvim_open_win`),
     -- with the exception of row, column, width and height, which are used as

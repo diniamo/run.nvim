@@ -83,10 +83,12 @@ local function prepare()
 
         if config.darken then
             local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
-            normal.bg = darken(normal.bg, config.darken)
-            vim.api.nvim_set_hl(0, "RunNormal", normal)
+            if normal.bg then
+                normal.bg = darken(normal.bg, config.darken)
+                vim.api.nvim_set_hl(0, "RunNormal", normal)
 
-            wo.winhighlight = "Normal:RunNormal"
+                wo.winhighlight = "Normal:RunNormal"
+            end
         end
     else
         vim.api.nvim_win_set_buf(terminal.window, terminal.buffer)

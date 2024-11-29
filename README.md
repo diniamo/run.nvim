@@ -10,7 +10,7 @@ Install the plugin with your favorite plugin manager, and call the setup functio
 ```lua
 require("run").setup({
     -- Automatically save the current buffer before running the command.
-    autosave = false,
+    auto_save = false,
     -- The format used for sending a notification before running a command,
     -- where %s represents the command (see lua's string.format). Set to nil
     -- to disable notifications. Eg. "$ %s"

@@ -1,5 +1,5 @@
 local config = {
-    autosave = false,
+    auto_save = false,
     notification_format = nil,
     disable_number = true,
     darken = 0.2,

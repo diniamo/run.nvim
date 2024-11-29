@@ -32,7 +32,7 @@ function M.run(command, override)
         end
     end
 
-    if M.config.autosave and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(0), "modified") then vim.cmd("silent! write") end
+    if M.config.auto_save and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(0), "modified") then vim.cmd("silent! write") end
     if M.config.notification_format then vim.notify(string.format(M.config.notification_format, command)) end
     terminal.run_command(command, cwd)
 end

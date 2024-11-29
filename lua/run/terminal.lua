@@ -99,7 +99,23 @@ function M.run_command(command, directory)
     prepare()
 
     local id = vim.api.nvim_buf_call(terminal.buffer, function()
-        vim.fn.termopen(command, { cwd = directory })
+        local opts = { cwd = directory }
+
+        if config.auto_scroll then
+            local scroll = function()
+                if vim.api.nvim_buf_is_valid(terminal.buffer) and vim.api.nvim_buf_is_loaded(terminal.buffer) then
+                    vim.api.nvim_buf_call(terminal.buffer, function()
+                        local mode = vim.api.nvim_get_mode().mode
+                        if mode == "n" or mode == "nt" then vim.cmd("normal! G") end
+                    end)
+                end
+            end
+
+            opts.on_stdout = scroll
+            opts.on_stderr = scroll
+        end
+
+        return vim.fn.termopen(command, opts)
     end)
 
     if id == -1 then

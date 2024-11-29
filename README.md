@@ -27,7 +27,9 @@ require("run").setup({
     winopts = {
         split = "below",
         height = 0.25
-    }
+    },
+    -- Automatically scroll the terminal as the running program outputs text
+    auto_scroll = true
 })
 ```
 

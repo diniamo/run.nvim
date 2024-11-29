@@ -6,7 +6,8 @@ local config = {
     winopts = {
         split = "below",
         height = 0.25
-    }
+    },
+    auto_scroll = true
 }
 
 local proxy = {}

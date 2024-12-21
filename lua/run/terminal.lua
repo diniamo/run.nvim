@@ -56,9 +56,7 @@ local function prepare()
 
 
     -- Resetting the buffer state is more trouble then worth, so we just create a new one
-    if terminal.buffer and vim.api.nvim_buf_is_valid(terminal.buffer) then
-        vim.api.nvim_buf_delete(terminal.buffer, { force = true })
-    end
+    local previous_buffer = terminal.buffer
     terminal.buffer = vim.api.nvim_create_buf(false, false)
 
     vim.keymap.set('t', "<Esc>", "<C-\\><C-n>", { buffer = terminal.buffer })
@@ -94,6 +92,11 @@ local function prepare()
         end
     else
         vim.api.nvim_win_set_buf(terminal.window, terminal.buffer)
+    end
+
+
+    if previous_buffer then
+        vim.api.nvim_buf_delete(previous_buffer, {})
     end
 end
 

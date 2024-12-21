@@ -69,6 +69,8 @@ local function prepare()
 
         local wo = vim.wo[terminal.window]
 
+        wo.cursorline = false
+
         local split = config.winopts.split
         if split == "left" or split == "right" then
             wo.winfixwidth = true

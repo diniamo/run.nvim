@@ -6,7 +6,7 @@ Instead of having to configure per-project or per-extension run commands, run.nv
 
 ## Setup / Configuration
 
-Install the plugin with your favorite plugin manager, and call the setup function with your configuration (the values below are the defaults):
+Install the plugin with your favorite plugin manager, and call the setup function in your configuration (the values below are the defaults):
 ```lua
 require("run").setup({
     -- Automatically save the current buffer before running the command.

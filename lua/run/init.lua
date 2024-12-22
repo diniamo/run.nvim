@@ -37,9 +37,9 @@ function M.run(command, override)
     terminal.run_command(command, cwd)
 end
 
-function M.setup(config)
+function M.setup(user_config)
     M.config = require("run.config")
-    if config then M.config(config) end
+    if user_config then M.config(user_config) end
 
     M.cache = require("run.cache")
 

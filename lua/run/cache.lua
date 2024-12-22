@@ -2,9 +2,6 @@ local cache_directory = vim.fs.joinpath(vim.fn.stdpath("data"), "run")
 local cache = {}
 local ensured = false
 
-function hash(str)
-end
-
 local function file_path(key)
     -- djb2
     local hash = 5381

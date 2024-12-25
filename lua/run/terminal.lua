@@ -1,7 +1,6 @@
 local M = {}
 
 local bit = require("bit")
-local config = require("run.config")
 
 local terminal = {}
 local unused_buffers = {}
@@ -25,7 +24,7 @@ local function darken(color, amount)
 end
 
 local function normalize(val, max)
-    if val < 0 then
+    if val <= 0 then
         return 0
     elseif val <= 1 then
         return round(max * val)
@@ -50,7 +49,7 @@ local function normalize_table(t)
     return new
 end
 
-local function prepare()
+local function prepare(config)
     if terminal.jobid then
         vim.fn.jobstop(terminal.jobid)
     end
@@ -101,8 +100,8 @@ local function prepare()
     end
 end
 
-function M.run_command(command, directory)
-    prepare()
+function M.run_command(config, command, directory)
+    prepare(config)
 
     local buffer = terminal.buffer
 

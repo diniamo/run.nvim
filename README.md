@@ -54,10 +54,7 @@ vim.keymap.set('n', "<leader>ri", run.run)
 -- Prompts for a command, and overrides the cached one with it
 vim.keymap.set('n', "<leader>ro", function() run.run(nil, true) end)
 -- Prompts for a command to run, without overriding
-vim.keymap.set('n', "<leader>rc", function()
-    local input = vim.fn.input("Run command: ")
-    if input ~= "" then run.run(input, false) end
-end)
+vim.keymap.set('n', "<leader>rc", run.run_prompt)
 ```
 
 ## API
@@ -65,5 +62,6 @@ end)
 The plugin exposes the following fields:
 - `setup()` - initialization
 - `run(command, override)` - main functionality, explained above
+- `run_prompt()` -- prompt for a command, and run it without overriding (this function exists because it's not possible to get this functionality with just the one above)
 - `cache` - this is simply a table mapping paths to commands. Note that setting a field in the table will overwrite it in the cache on the disk as well.
 - `config` - the configuration table in use

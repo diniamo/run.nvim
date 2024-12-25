@@ -34,7 +34,22 @@ local function highlight(input)
     local highlights = {}
     for id, node in query:iter_captures(tree:root(), input) do
         local _, cstart, _, cend = node:range()
-        table.insert(highlights, { cstart, cend, "@" .. query.captures[id] })
+        local hl = { cstart, cend, "@" .. query.captures[id] }
+
+        -- HACK: vim.ui.input doesn't like overlapping highlights, so if we find an overlap, we override the previous highlight.
+        -- We do this instead of skipping since builtins come after functions in the iterator for some reason (on purpose for overriding?).
+        -- This makes the assumption that overlaps can only be exact, since implementing this properly would be quite some effort,
+        -- so I won't do it until someone runs into a case where that assumption is not sufficient.
+        for i, inner in ipairs(highlights) do
+            if inner[1] == cstart and inner[2] == cend then
+                highlights[i] = hl
+                goto skip
+            end
+        end
+
+        table.insert(highlights, hl)
+
+        ::skip::
     end
     return highlights
 end

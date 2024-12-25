@@ -4,6 +4,7 @@ local bit = require("bit")
 local config = require("run.config")
 
 local terminal = {}
+local unused_buffers = {}
 
 local function round(n)
     local f = math.floor(n)
@@ -56,7 +57,6 @@ local function prepare()
 
 
     -- Resetting the buffer state is more trouble then worth, so we just create a new one
-    local previous_buffer = terminal.buffer
     terminal.buffer = vim.api.nvim_create_buf(false, false)
 
     vim.keymap.set('t', "<Esc>", "<C-\\><C-n>", { buffer = terminal.buffer })
@@ -95,21 +95,29 @@ local function prepare()
     end
 
 
-    if previous_buffer then
-        vim.api.nvim_buf_delete(previous_buffer, {})
+    for i, v in ipairs(unused_buffers) do
+        vim.api.nvim_buf_delete(v, {})
+        unused_buffers[i] = nil
     end
 end
 
 function M.run_command(command, directory)
     prepare()
 
-    local id = vim.api.nvim_buf_call(terminal.buffer, function()
-        local opts = { cwd = directory }
+    local buffer = terminal.buffer
+
+    local id = vim.api.nvim_buf_call(buffer, function()
+        local opts = {
+            cwd = directory,
+            on_exit = function()
+                table.insert(unused_buffers, buffer)
+            end
+        }
 
         if config.auto_scroll then
             local scroll = function()
-                if vim.api.nvim_buf_is_valid(terminal.buffer) and vim.api.nvim_buf_is_loaded(terminal.buffer) then
-                    vim.api.nvim_buf_call(terminal.buffer, function()
+                if vim.api.nvim_buf_is_valid(buffer) and vim.api.nvim_buf_is_loaded(buffer) then
+                    vim.api.nvim_buf_call(buffer, function()
                         local mode = vim.api.nvim_get_mode().mode
                         if mode == "n" or mode == "nt" then vim.cmd("normal! G") end
                     end)

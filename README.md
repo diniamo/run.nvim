@@ -35,14 +35,16 @@ require("run").setup({
 
 ## Usage
 
-The plugin consists of only one command called `Run` (and it's lua counterpart - `run.run(command, override)`). Here is how they work (only the command is explained below, but the lua function is the same, with the argument passed to the command being `command` and the bang being `override`):
+The plugin consists of only two commands: `Run` (lua: `run.run(command, override)`) and `RunPrompt` (lua: `run.run_prompt()`). Here is how they work:
 
-1. If the command is *not* executed with a bang
+1. `Run`
     - If an argument *was* passed, use that as the command without overriding the cached one
-    - If an argument was *not* passed, use the command from the cache, or prompt for one if there isn't one cached
-2. If the command *is* executed with a bang
+    - If an argument was *not* passed, use the command from the cache, or prompt for one
+2. `Run!`
     - If an argument *was* passed, use that as the command, and override the cached one with it
     - If an argument was *not* passed, prompt for one, and override the cached command with it
+3. `RunPrompt`
+    - Prompt for a command and run it without updating the cache
 
 It's also recommended to create mappings:
 
@@ -61,7 +63,7 @@ vim.keymap.set('n', "<leader>rc", run.run_prompt)
 
 The plugin exposes the following fields:
 - `setup()` - initialization
-- `run(command, override)` - main functionality, explained above
-- `run_prompt()` -- prompt for a command, and run it without overriding (this function exists because it's not possible to get this functionality with just the one above)
+- `run(command, override)` - equivalent of the `Run` command (the bang means passing `true` as the second argument), see [Usage](#usage)
+- `run_prompt()` - equivalent of the `RunPrompt` command, see [Usage](#usage)
 - `cache` - this is simply a table mapping paths to commands. Note that setting a field in the table will overwrite it in the cache on the disk as well.
 - `config` - the configuration table in use

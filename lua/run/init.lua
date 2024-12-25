@@ -125,6 +125,8 @@ function M.setup(user_config)
             M.run(cmd.args, cmd.bang)
         end
     end, { bang = true, nargs = "?" })
+
+    vim.api.nvim_create_user_command("RunPrompt", M.run_prompt, {})
 end
 
 return M

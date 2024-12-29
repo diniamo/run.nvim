@@ -15,8 +15,12 @@ local M = {
 local terminal = nil
 
 local function effective_cwd()
-    local git = vim.fs.find(".git", { upward = true, type = "directory" })
-    return git[1] or vim.uv.cwd()
+    local git = vim.fs.find(".git", { upward = true, type = "directory" })[1]
+    if git then
+        return vim.fs.dirname(git)
+    else
+        return vim.uv.cwd()
+    end
 end
 
 local function highlight(input)
